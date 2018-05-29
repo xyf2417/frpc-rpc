@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>xyf.frpc</groupId>
+  <artifactId>frpc-rpc</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <frpc.version>0.0.1</frpc.version>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+        <groupId>xyf.frpc</groupId>
+  		<artifactId>frpc-config-spring</artifactId>
+        <version>${frpc.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>xyf.frpc</groupId>
+  		<artifactId>frpc-config-api</artifactId>
+        <version>${frpc.version}</version>
+    </dependency>
+  </dependencies>
+</project>
