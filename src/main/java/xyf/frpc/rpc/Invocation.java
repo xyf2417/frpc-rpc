@@ -19,4 +19,12 @@ public interface Invocation {
      * @serial
      */
     Object[] getArguments();
+    
+    
+     void setParameterTypes(Class<?>[] parameterTypes);
+
+
+     void setArguments(Object[] args);
+     
+     void setMethodName(String methodName);
 }

@@ -13,4 +13,9 @@ public interface Result {
 	 * @return
 	 */
 	public ResultStatus getStatus();
+	
+	public void setValue(Object value);
+	
+	
+	public void setStatus(ResultStatus status);
 }

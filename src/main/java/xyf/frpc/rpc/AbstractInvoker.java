@@ -6,7 +6,7 @@ public abstract class AbstractInvoker<T> implements Invoker<T> {
 	
 	private Class<T> cInterface;
 	
-	private Provider provider;
+	private Object proxy;
 	
 	
 	public void setInterface(Class<T> cInterface) {
@@ -17,12 +17,15 @@ public abstract class AbstractInvoker<T> implements Invoker<T> {
 		// TODO Auto-generated method stub
 		return cInterface;
 	}
+
+	public Object getProxy() {
+		return proxy;
+	}
+
+	public void setProxy(Object proxy) {
+		this.proxy = proxy;
+	}
 	
-	public Provider getProvider() {
-		return provider;
-	}
-	public void setProvider(Provider provider) {
-		this.provider = provider;
-	}
+	
 	
 }
