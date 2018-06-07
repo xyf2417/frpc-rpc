@@ -1,6 +1,13 @@
 package xyf.frpc.rpc;
 
-public class RpcResult implements Result {
+import java.io.Serializable;
+
+public class RpcResult implements Result, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Object value;
 	
@@ -24,4 +31,7 @@ public class RpcResult implements Result {
 		this.status = status;
 	}
 
+	public String toString() {
+		return "Result(" + value + ")";
+	}
 }

@@ -27,4 +27,8 @@ public interface Invocation {
      void setArguments(Object[] args);
      
      void setMethodName(String methodName);
+     
+     public String getInterfaceFullName();
+
+ 	public void setInterfaceFullName(String interfaceFullName) ;
 }

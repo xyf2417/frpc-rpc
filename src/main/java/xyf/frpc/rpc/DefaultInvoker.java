@@ -1,6 +1,7 @@
 package xyf.frpc.rpc;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class DefaultInvoker<T> extends AbstractInvoker<T> {
 
@@ -11,8 +12,17 @@ public class DefaultInvoker<T> extends AbstractInvoker<T> {
 		Class[] parameterTypes = invocation.getParameterTypes();
 		Object [] args = invocation.getArguments();
 		Method method = null;
+		Class clazz = null;
 		try {
-			method = proxy.getClass().getMethod(methodName, parameterTypes);
+			try {
+				clazz = Class.forName(invocation.getInterfaceFullName());
+			} catch (ClassNotFoundException e) {
+				System.out.println("DefaultInvoker invoke forname error");
+			}
+			System.out.println("-------DefaultInvoker " + invocation.getInterfaceFullName());
+			System.out.println("-------DefaultInvoker " + Arrays.toString(parameterTypes));
+			System.out.println("-------DefaultInvoker " + Arrays.toString(args));
+			method = clazz.getMethod(methodName, parameterTypes);
 		} catch (NoSuchMethodException e) {
 			
 			e.printStackTrace();
