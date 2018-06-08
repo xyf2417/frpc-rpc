@@ -3,32 +3,30 @@ package xyf.frpc.rpc;
 public interface Invocation {
 
 	public String getMethodName();
-	
+
 	/**
-     * get parameter types.
-     *
-     * @return parameter types.
-     * @serial
-     */
-    Class<?>[] getParameterTypes();
+	 * get parameter types.
+	 * 
+	 * @return parameter types.
+	 * @serial
+	 */
+	Class<?>[] getParameterTypes();
 
-    /**
-     * get arguments.
-     *
-     * @return arguments.
-     * @serial
-     */
-    Object[] getArguments();
-    
-    
-     void setParameterTypes(Class<?>[] parameterTypes);
+	/**
+	 * get arguments.
+	 * 
+	 * @return arguments.
+	 * @serial
+	 */
+	Object[] getArguments();
 
+	void setParameterTypes(Class<?>[] parameterTypes);
 
-     void setArguments(Object[] args);
-     
-     void setMethodName(String methodName);
-     
-     public String getInterfaceFullName();
+	void setArguments(Object[] args);
 
- 	public void setInterfaceFullName(String interfaceFullName) ;
+	void setMethodName(String methodName);
+
+	public String getInterfaceFullName();
+
+	public void setInterfaceFullName(String interfaceFullName);
 }
