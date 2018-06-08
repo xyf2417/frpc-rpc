@@ -32,6 +32,13 @@ public class RpcResult implements Result, Serializable {
 	}
 
 	public String toString() {
-		return "Result(" + value + ")";
+		StringBuilder res = new StringBuilder();
+		res.append("Result(");
+		res.append("status:" + status);
+		if(value != null){
+			res.append(", value:" + value);
+		}
+		res.append(")");
+		return res.toString();
 	}
 }

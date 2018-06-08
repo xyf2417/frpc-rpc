@@ -11,38 +11,31 @@ public class DefaultInvoker<T> extends AbstractInvoker<T> {
 		String methodName = invocation.getMethodName();
 		Class[] parameterTypes = invocation.getParameterTypes();
 		Object [] args = invocation.getArguments();
+		
 		Method method = null;
 		Class clazz = null;
+		
+		Result result = new RpcResult();
 		try {
 			try {
 				clazz = Class.forName(invocation.getInterfaceFullName());
 			} catch (ClassNotFoundException e) {
-				System.out.println("DefaultInvoker invoke forname error");
+				result.setStatus(ResultStatus.NO_SUCH_INTERFACE);
 			}
-			System.out.println("-------DefaultInvoker " + invocation.getInterfaceFullName());
-			System.out.println("-------DefaultInvoker " + Arrays.toString(parameterTypes));
-			System.out.println("-------DefaultInvoker " + Arrays.toString(args));
 			method = clazz.getMethod(methodName, parameterTypes);
+			
 		} catch (NoSuchMethodException e) {
-			
-			e.printStackTrace();
+			result.setStatus(ResultStatus.NO_SUCH_METHOD);
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		}
-		
-		Result result = new RpcResult();
-		if(method == null) {
 			result.setStatus(ResultStatus.ERROR);
-			
 		}
-		else{
-			try {
-				Object value = method.invoke(proxy, args);
-				result.setStatus(ResultStatus.NORMAL);
-				result.setValue(value);
-			} catch (Throwable e) {
-				result.setStatus(ResultStatus.ERROR);
-			}
+
+		try {
+			Object value = method.invoke(proxy, args);
+			result.setStatus(ResultStatus.NORMAL);
+			result.setValue(value);
+		} catch (Throwable e) {
+			result.setStatus(ResultStatus.ERROR);
 		}
 		
 		return result;

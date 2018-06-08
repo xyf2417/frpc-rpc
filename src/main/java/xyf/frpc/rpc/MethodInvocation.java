@@ -29,12 +29,10 @@ public class MethodInvocation implements Invocation {
 
 	public void setArguments(Object [] arguments) {
 		this.arguments = arguments;
-		System.out.println("---MethodInvocation " + Arrays.toString(this.arguments));
 	}
 
 	public void setParameterTypes(Class<?> [] parameterTypes) {
 		this.parameterTypes = parameterTypes;
-		System.out.println("---MethodInvocation " + Arrays.toString(this.parameterTypes));
 	}
 
 	public void setMethodName(String methodName) {
