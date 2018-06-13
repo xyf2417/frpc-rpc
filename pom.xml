@@ -11,15 +11,6 @@
   </properties>
   
   <dependencies>
-  	<dependency>
-        <groupId>xyf.frpc</groupId>
-  		<artifactId>frpc-config-spring</artifactId>
-        <version>${frpc.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>xyf.frpc</groupId>
-  		<artifactId>frpc-config-api</artifactId>
-        <version>${frpc.version}</version>
-    </dependency>
+  	
   </dependencies>
 </project>

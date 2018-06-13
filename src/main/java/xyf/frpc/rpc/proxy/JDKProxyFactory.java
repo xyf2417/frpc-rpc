@@ -4,19 +4,12 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import xyf.frpc.config.Provider;
 
 public class JDKProxyFactory implements ProxyFactory{
 
-	public Object getProxy(Class cinterface, Object target) {
-		return Proxy.newProxyInstance(cinterface.getClassLoader(), new Class[]{cinterface}, new JDKInvocationHandler(target));
+	public Object getProxy(Class interfaceClass, Object target) {
+		return Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new JDKInvocationHandler(target));
 	}
-	
-
-	public Object getProxy(Provider provider) {
-		return getProxy(provider.getInterface(), provider.getTarget());
-	}
-	
 	
 
 }
