@@ -6,12 +6,10 @@ public class MethodInvocation implements Invocation {
 
 	private String interfaceFullName;
 	private String methodName;
-	
-	private Class<?> [] parameterTypes;
-	
-	private Object [] arguments;
-	
-	
+
+	private Class<?>[] parameterTypes;
+
+	private Object[] arguments;
 
 	public String getMethodName() {
 		return methodName;
@@ -27,11 +25,11 @@ public class MethodInvocation implements Invocation {
 		return arguments;
 	}
 
-	public void setArguments(Object [] arguments) {
+	public void setArguments(Object[] arguments) {
 		this.arguments = arguments;
 	}
 
-	public void setParameterTypes(Class<?> [] parameterTypes) {
+	public void setParameterTypes(Class<?>[] parameterTypes) {
 		this.parameterTypes = parameterTypes;
 	}
 
@@ -46,12 +44,12 @@ public class MethodInvocation implements Invocation {
 	public void setInterfaceFullName(String interfaceFullName) {
 		this.interfaceFullName = interfaceFullName;
 	}
-	
+
 	public String toString() {
 		StringBuilder res = new StringBuilder();
 		res.append("-----MethodInvocation(\n");
 		res.append(this.interfaceFullName + "\n");
-		res.append(this.methodName +"\n");
+		res.append(this.methodName + "\n");
 		res.append(Arrays.toString(this.parameterTypes) + "\n");
 		res.append(Arrays.toString(this.arguments) + "\n)");
 		return res.toString();
