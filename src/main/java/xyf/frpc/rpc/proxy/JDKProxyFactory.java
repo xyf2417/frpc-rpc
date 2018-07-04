@@ -77,6 +77,10 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 			return method.invoke(trivialObjectForDefaultMethod, args);
 		}
 		Invocation invocation = new MethodInvocation();
+		invocation.setArguments(args);
+		invocation.setParameterTypes(method.getParameterTypes());
+		invocation.setMethodName(method.getName());
+		invocation.setInterfaceFullName(interfaceClass.getName());
 
 		return invokerMethod.invoke(proxied, args);
 	}

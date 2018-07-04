@@ -29,4 +29,8 @@ public interface Invocation {
 	public String getInterfaceFullName();
 
 	public void setInterfaceFullName(String interfaceFullName);
+	
+	public void setInvokeId(long id);
+	
+	public long getInvokerId();
 }

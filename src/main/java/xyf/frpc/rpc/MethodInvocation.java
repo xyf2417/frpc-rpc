@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class MethodInvocation implements Invocation {
 
+	private long invokeId;
 	private String interfaceFullName;
 	private String methodName;
 
@@ -53,6 +54,15 @@ public class MethodInvocation implements Invocation {
 		res.append(Arrays.toString(this.parameterTypes) + "\n");
 		res.append(Arrays.toString(this.arguments) + "\n)");
 		return res.toString();
+	}
+
+	public void setInvokeId(long id) {
+		this.invokeId = id;
+	}
+
+	public long getInvokerId() {
+		// TODO Auto-generated method stub
+		return this.invokeId;
 	}
 
 }
