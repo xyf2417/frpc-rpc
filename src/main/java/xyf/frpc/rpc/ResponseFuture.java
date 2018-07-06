@@ -11,7 +11,7 @@ public class ResponseFuture {
 	 */
 	private static final Map<Long, ResponseFuture> FUTURES = new ConcurrentHashMap<Long, ResponseFuture>();
 
-	private Object result;
+	private volatile Object result;
 	
 	/**
 	 * Thread which waits for this future
@@ -31,7 +31,7 @@ public class ResponseFuture {
 	public Object get() {
 		t = Thread.currentThread();
 		LockSupport.park();
-		return null;
+		return result;
 	}
 	
 	

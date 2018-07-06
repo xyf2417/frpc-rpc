@@ -8,6 +8,7 @@ import java.util.List;
 
 import xyf.frpc.rpc.Invocation;
 import xyf.frpc.rpc.MethodInvocation;
+import xyf.frpc.rpc.ResponseFuture;
 
 public class JDKProxyFactory implements ProxyFactory {
 
@@ -62,7 +63,7 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 		}
 
 		try {
-			invokerMethod = proxied.getClass().getDeclaredMethod("invoker",
+			invokerMethod = proxied.getClass().getDeclaredMethod("invoke",
 					Invocation.class);
 			invokerMethod.setAccessible(true);
 		} catch (Exception e) {
@@ -81,8 +82,9 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 		invocation.setParameterTypes(method.getParameterTypes());
 		invocation.setMethodName(method.getName());
 		invocation.setInterfaceFullName(interfaceClass.getName());
-
-		return invokerMethod.invoke(proxied, args);
+		Object rpcResult = (ResponseFuture) invokerMethod.invoke(proxied, invocation);
+		
+		return rpcResult;
 	}
 
 }
