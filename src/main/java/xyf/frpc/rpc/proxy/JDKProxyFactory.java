@@ -83,8 +83,9 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 		invocation.setParameterTypes(method.getParameterTypes());
 		invocation.setMethodName(method.getName());
 		invocation.setInterfaceFullName(interfaceClass.getName());
-		Object result = invokerMethod.invoke(proxied, invocation);
-		return result;
+		Result result = (Result) invokerMethod.invoke(proxied, invocation);
+		Object methodReturn = result.getValue();
+		return methodReturn;
 	}
 
 }
