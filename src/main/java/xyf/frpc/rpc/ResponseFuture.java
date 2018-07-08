@@ -2,9 +2,15 @@ package xyf.frpc.rpc;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ResponseFuture {
+	
+	private ReentrantLock lock = new ReentrantLock();
+	
+	private Condition done = lock.newCondition();
 	
 	/**
 	 * Invocation id <-> ResponseFuture
@@ -29,19 +35,40 @@ public class ResponseFuture {
 	 * @return
 	 */
 	public Object get() {
-		t = Thread.currentThread();
-		LockSupport.park();
+		if(!isDone()) {
+			lock.lock();
+			try{
+				while(!isDone()) {
+					done.await();
+				}
+			} catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+				lock.unlock();
+			}
+		}
 		return result;
 	}
 	
 	
 	public void setResult(Object res) {
-		this.result = res;
-		LockSupport.unpark(this.t);
+		lock.lock();
+        try {
+            result  = res;
+            if (done != null) {
+                done.signal();
+            }
+        } finally {
+            lock.unlock();
+        } 
 	}
 	
 	public static ResponseFuture getFuture(Long id) {
 		return FUTURES.get(id);
+	}
+	
+	public boolean isDone() {
+		return result != null;
 	}
 	
 }
