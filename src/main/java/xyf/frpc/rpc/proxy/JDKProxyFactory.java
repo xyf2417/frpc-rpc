@@ -8,7 +8,6 @@ import java.util.List;
 
 import xyf.frpc.rpc.Invocation;
 import xyf.frpc.rpc.MethodInvocation;
-import xyf.frpc.rpc.ResponseFuture;
 import xyf.frpc.rpc.Result;
 
 public class JDKProxyFactory implements ProxyFactory {

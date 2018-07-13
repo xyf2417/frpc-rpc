@@ -48,11 +48,11 @@ public class MethodInvocation implements Invocation {
 
 	public String toString() {
 		StringBuilder res = new StringBuilder();
-		res.append("-----MethodInvocation(\n");
-		res.append(this.interfaceFullName + "\n");
-		res.append(this.methodName + "\n");
-		res.append(Arrays.toString(this.parameterTypes) + "\n");
-		res.append(Arrays.toString(this.arguments) + "\n)");
+		res.append("MethodInvocation(invokeId=");
+		res.append(invokeId + ",");
+		res.append(this.interfaceFullName + ".");
+		res.append(this.methodName + "(");
+		res.append(Arrays.toString(this.parameterTypes) + "))");
 		return res.toString();
 	}
 

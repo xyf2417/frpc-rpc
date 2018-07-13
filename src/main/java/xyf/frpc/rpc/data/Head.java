@@ -2,21 +2,12 @@ package xyf.frpc.rpc.data;
 
 import xyf.frpc.rpc.util.ByteUtil;
 
-
-
-/**
- * +---------+--------------------------------------+-------------------+ |
- * magic | flag|status| invokeId | bodyLegth | | | | | | |
- * +--------------------------------------------------------------------+ | | |
- * | | | | 2 | 1 | 1 | 8 | 4 | | | | | | |
- * +---------+-----+------+-------------------------+-------------------+
- * 
- * @author xyf
- * 
- */
 public class Head {
-	public static final short MAGIC = 24256;
+	
+	public static final short MAGIC_NUMBER = 24256;
+	
 	public static final int HEAD_LENGTH = 16;
+	
 
 	private short magic;
 
@@ -24,7 +15,7 @@ public class Head {
 
 	private byte status;
 
-	private long invokeId;
+	private long reservedValue = 0;
 
 	private int bodyLength;
 
@@ -52,13 +43,6 @@ public class Head {
 		this.status = status;
 	}
 
-	public long getInvokeId() {
-		return invokeId;
-	}
-
-	public void setInvokeId(long invokeId) {
-		this.invokeId = invokeId;
-	}
 
 	public int getBodyLength() {
 		return bodyLength;
@@ -81,7 +65,7 @@ public class Head {
 		head.setStatus(bytes[3]);
 		temp = new byte[8];
 		System.arraycopy(bytes, 4, temp, 0, 8);
-		head.setInvokeId(ByteUtil.bytes2long(temp));
+		head.setReservedValue(ByteUtil.bytes2long(temp));
 		temp = new byte[4];
 		System.arraycopy(bytes, 12, temp, 0, 4);
 		head.setBodyLength(ByteUtil.bytes2int(temp));
@@ -92,7 +76,7 @@ public class Head {
 		StringBuilder res = new StringBuilder();
 		res.append("Head(");
 		res.append("magic=" + magic + ",flag=" + flag + ",status=" + status);
-		res.append(",invokeId=" + invokeId);
+		res.append(",reservedValue=" + reservedValue);
 		res.append(",bodyLength=" + bodyLength + ")");
 		return res.toString();
 	}
@@ -102,10 +86,19 @@ public class Head {
 		System.arraycopy(ByteUtil.short2bytes(head.getMagic()), 0, bytes, 0, 2);
 		bytes[2] = head.getFlag();
 		bytes[3] = head.getStatus();
-		System.arraycopy(ByteUtil.long2bytes(head.getInvokeId()), 0, bytes, 4,
+		System.arraycopy(ByteUtil.long2bytes(head.getReservedValue()), 0, bytes, 4,
 				8);
 		System.arraycopy(ByteUtil.int2bytes(head.getBodyLength()), 0, bytes,
 				12, 4);
 		return bytes;
 	}
+
+	public long getReservedValue() {
+		return reservedValue;
+	}
+
+	public void setReservedValue(long reservedValue) {
+		this.reservedValue = reservedValue;
+	}
+	
 }
