@@ -7,7 +7,7 @@ public interface Invoker<T> {
 	
 	public void setInterface(Class<T> cInterface);
 	
-	public Result invoke(Invocation invocation);
+	public Result invoke(Invocation invocation) throws RpcException;
 
 
 }
