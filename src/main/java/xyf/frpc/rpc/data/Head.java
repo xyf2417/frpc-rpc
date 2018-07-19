@@ -8,6 +8,12 @@ public class Head {
 	
 	public static final int HEAD_LENGTH = 16;
 	
+	public static final byte REQUEST_FLAG = (byte)1;
+	
+	public static final byte RESPONSE_FLAG = (byte)2;
+	
+	public static final byte TRIVIAL_RESPONSE_FLAG = (byte)4;
+	
 
 	private short magic;
 
@@ -18,6 +24,7 @@ public class Head {
 	private long reservedValue = 0;
 
 	private int bodyLength;
+	
 
 	public short getMagic() {
 		return magic;
