@@ -50,10 +50,10 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 	private Method invokerMethod;
 
 	// FrpcInvoker
-	private Object proxied;
+	private Object frpcInvoker;
 
 	public JDKReferenceInvocationHandler(Object target, Class interfaceClass) {
-		this.proxied = target;
+		this.frpcInvoker = target;
 		this.interfaceClass = interfaceClass;
 		Method[] methods = interfaceClass.getDeclaredMethods();
 		if (methods != null && methods.length > 0) {
@@ -63,7 +63,7 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 		}
 
 		try {
-			invokerMethod = proxied.getClass().getDeclaredMethod("invoke",
+			invokerMethod = frpcInvoker.getClass().getDeclaredMethod("invoke",
 					Invocation.class);
 			invokerMethod.setAccessible(true);
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ class JDKReferenceInvocationHandler implements InvocationHandler {
 		invocation.setParameterTypes(method.getParameterTypes());
 		invocation.setMethodName(method.getName());
 		invocation.setInterfaceFullName(interfaceClass.getName());
-		Result result = (Result) invokerMethod.invoke(proxied, invocation);
+		Result result = (Result) invokerMethod.invoke(frpcInvoker, invocation);
 		Object methodReturn = result.getValue();
 		return methodReturn;
 	}
